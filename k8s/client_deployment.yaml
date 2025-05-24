@@ -14,9 +14,10 @@ spec:
     spec:
       containers:
         - name: client
-          image: tuusuario/client:latest
+          image: mern-client:latest
+          imagePullPolicy: Never
           ports:
-            - containerPort: 3000
+            - containerPort: 8632
           env:
             - name: VITE_API_URL
               value: "http://backend-service:5000"
@@ -30,6 +31,6 @@ spec:
     app: client
   ports:
     - protocol: TCP
-      port: 3000
-      targetPort: 3000
+      port: 8632
+      targetPort: 8632
   type: NodePort
