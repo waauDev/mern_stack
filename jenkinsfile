@@ -21,17 +21,32 @@ pipeline {
             }
         }
         
-        stage('Install Backend Dependencies') {
+        stage('Instala depedencias backend') {
             steps {
                 echo 'Instalando dependencias del backend (src)...'
                 bat 'cd src && npm i'
             }
         }
 
-         stage('Haciendo test de backend') {
+         stage('test de backend') {
             steps {
                 echo 'Haciendo test de backend'
                 bat 'cd src && npm test'
+            }
+        }
+
+        
+        stage('Instalar  Dependencias cliente') {
+            steps {
+                echo 'Instalando dependencias del frontend (client)...'
+                bat 'cd client && npm i'
+            }
+        }
+
+         stage('test de backend') {
+            steps {
+                echo 'test frontend'
+                bat 'cd client && npm test'
             }
         }
     }
