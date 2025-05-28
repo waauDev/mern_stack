@@ -43,7 +43,7 @@ pipeline {
             }
         }
 
-         stage('test de backend') {
+         stage('test de frontend') {
             steps {
                 echo 'test frontend'
                 bat 'cd client && npm test'
