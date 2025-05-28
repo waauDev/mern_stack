@@ -27,5 +27,12 @@ pipeline {
                 bat 'cd src && npm i'
             }
         }
+
+         stage('Haciendo test de backend') {
+            steps {
+                echo 'Haciendo test de backend'
+                bat 'cd src && npm test'
+            }
+        }
     }
 }
