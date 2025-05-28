@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    
+    tools {
+        nodejs 'node18'
+    }
+    
+    options {
+        timeout(time: 10, unit: 'MINUTES')
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Descargando código del repositorio...'
+                git branch: 'main', 
+                    url: 'https://github.com/waauDev/mern_stack.git'
+                
+                echo 'Código descargado. Verificando estructura:'
+                bat 'dir'
+            }
+        }
+        
+        stage('Install Backend Dependencies') {
+            steps {
+                echo 'Instalando dependencias del backend (src)...'
+                bat 'cd src && npm i'
+            }
+        }
+    }
+}
