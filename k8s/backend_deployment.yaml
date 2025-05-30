@@ -1,35 +1,28 @@
+# backend-deployment + service
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: backend
+metadata: { name: backend-deployment }
 spec:
   replicas: 3
-  selector:
-    matchLabels:
-      app: backend
+  selector: { matchLabels: { app: mern-backend } }
   template:
-    metadata:
-      labels:
-        app: backend
+    metadata: { labels: { app: mern-backend } }
     spec:
       containers:
-        - name: backend
+        - name: mern-backend
           image: mern-backend:latest
           imagePullPolicy: Never
-          ports:
-            - containerPort: 5000
-          env:
-            - name: MONGO_URI
-              value: "mongodb://host.docker.internal:27017/merndb"
+          ports: [{ containerPort: 5000 }]
+          envFrom: [{ secretRef: { name: backend-env } }]
+
 ---
 apiVersion: v1
 kind: Service
-metadata:
-  name: backend-service
+metadata: { name: backend }
 spec:
-  selector:
-    app: backend
+  selector: { app: mern-backend }
   ports:
-    - protocol: TCP
-      port: 5000
+    - port: 5000
       targetPort: 5000
+  # clusterIP por defecto (ClusterIP)
+

@@ -1,36 +1,32 @@
+# frontend-deployment + service
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: client
+metadata: { name: frontend-deployment }
 spec:
   replicas: 3
-  selector:
-    matchLabels:
-      app: client
+  selector: { matchLabels: { app: mern-frontend } }
   template:
-    metadata:
-      labels:
-        app: client
+    metadata: { labels: { app: mern-frontend } }
     spec:
       containers:
-        - name: client
-          image: mern-client:latest
+        - name: mern-frontend
+          image: mern-frontend:latest
           imagePullPolicy: Never
-          ports:
-            - containerPort: 8632
+          ports: [{ containerPort: 8632 }]
           env:
-            - name: VITE_API_URL
-              value: "http://backend-service:5000"
+            - name: REACT_APP_API_URL
+              value: "http://backend:5000"
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: client-service
+  name: frontend
 spec:
   selector:
-    app: client
-  ports:
-    - protocol: TCP
-      port: 8632
-      targetPort: 8632
+    app: mern-frontend
   type: NodePort
+  ports:
+    - port: 80          # puerto interno del cluster
+      targetPort: 8632  # puerto del contenedor
+      nodePort: 30080   # puerto externo (30000–32767)

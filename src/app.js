@@ -9,7 +9,8 @@ import taskRoutes from './routes/tasks.routes.js'
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:8632'],
+   origin: true,
+  //origin: ['http://localhost:5173', 'http://localhost:8632'],
   credentials: true
 }));
 app.use(morgan('dev'));
