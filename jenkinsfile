@@ -55,6 +55,14 @@ pipeline {
             }
         }
 
+        stage('Build Docker Image de backend'){
+			steps {
+				script {
+					dockerImage = docker.build("${DOCKER_HUB_REPO_BACK}:latest")
+				}
+			}
+		}
+
          
     }
     post {
