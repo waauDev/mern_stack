@@ -55,10 +55,19 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image de backend'){
+        stage('Build Docker Imagen de backend'){
 			steps {
 				script {
-					dockerImage = docker.build("${DOCKER_HUB_REPO_BACK}:latest", "src")
+					dockerImage = docker.build("${DOCKER_HUB_REPO_FRONT}:latest", "src")
+
+				}
+			}
+		}
+
+        stage('Build Docker Imagen de frontend'){
+			steps {
+				script {
+					dockerImage = docker.build("${DOCKER_HUB_REPO_BACK}:latest", "client")
 
 				}
 			}
