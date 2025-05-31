@@ -58,7 +58,7 @@ pipeline {
         stage('Build Docker Imagen de backend'){
 			steps {
 				script {
-					dockerImage = docker.build("${DOCKER_HUB_REPO_FRONT}:latest", "src")
+					dockerImageBack = docker.build("${DOCKER_HUB_REPO_BACK}:latest", "src")
 
 				}
 			}
@@ -67,11 +67,31 @@ pipeline {
         stage('Build Docker Imagen de frontend'){
 			steps {
 				script {
-					dockerImage = docker.build("${DOCKER_HUB_REPO_BACK}:latest", "client")
+					 dockerImageFront = docker.build("${DOCKER_HUB_REPO_FRONT}:latest", "client")
 
 				}
 			}
 		}
+        stage('Push backend a DockerHub') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', "${DOCKER_HUB_CREDENTIALS_ID}") {
+                        dockerImageBack.push('latest')
+                    }
+                }
+            }
+        }
+        stage('Push frontend a DockerHub') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', "${DOCKER_HUB_CREDENTIALS_ID}") {
+                        dockerImageFront.push('latest')
+                    }
+                }
+            }
+        }
+
+       
 
          
     }
