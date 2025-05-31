@@ -24,7 +24,7 @@ pipeline {
     }
     post {
 		success {
-			echo 'Build&Deploy completed succesfully!'
+			echo 'Build&Deploy completado correctamente!'
 		}
 		failure {
 			echo 'Build&Deploy failed. Check logs.'
