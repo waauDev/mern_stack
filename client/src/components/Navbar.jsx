@@ -19,7 +19,7 @@ function Navbar() {
         </li>
         <li>
             <Link to="/add-task"
-            className="bg-indigo-500 px-4 py-1 rounded-sm">Agregar Tarea</Link>
+            className="bg-indigo-500 px-4 py-1 rounded-sm">Agregar Tareas William</Link>
         </li>
         <li>
             <Link to="/" onClick={()=>{
