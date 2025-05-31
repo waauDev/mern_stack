@@ -5,6 +5,11 @@ pipeline {
         nodejs 'node18'
     }
     
+    environment {
+		DOCKER_HUB_CREDENTIALS_ID = 'jen-dockerhub'
+		DOCKER_HUB_REPO_FRONT = 'mineacuna/mern_stack-frontend'
+        DOCKER_HUB_REPO_BACK = 'mineacuna/mern_stack-backend'
+	}
     options {
         timeout(time: 10, unit: 'MINUTES')
     }
@@ -20,6 +25,36 @@ pipeline {
                 bat 'dir'
             }
         }
+
+        stage('Instala depedencias backend') {
+            steps {
+                echo 'Instalando dependencias del backend (src)...'
+                bat 'cd src && npm i'
+            }
+        }
+
+         stage('test de backend') {
+            steps {
+                echo 'Haciendo test de backend'
+                bat 'cd src && npm test'
+            }
+        }
+
+        
+        stage('Instalar  Dependencias cliente') {
+            steps {
+                echo 'Instalando dependencias del frontend (client)...'
+                bat 'cd client && npm i'
+            }
+        }
+
+         stage('test de frontend') {
+            steps {
+                echo 'test frontend'
+                bat 'cd client && npm test'
+            }
+        }
+
          
     }
     post {
