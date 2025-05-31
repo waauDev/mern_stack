@@ -21,8 +21,9 @@ kind: Service
 metadata: { name: backend }
 spec:
   selector: { app: mern-backend }
+  type: NodePort
   ports:
     - port: 5000
       targetPort: 5000
-  # clusterIP por defecto (ClusterIP)
+      nodePort: 30050
 
