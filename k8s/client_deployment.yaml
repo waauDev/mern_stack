@@ -10,8 +10,8 @@ spec:
     spec:
       containers:
         - name: mern-frontend
-          image: mern-frontend:latest
-          imagePullPolicy: Never
+          image: mineacuna/mern_stack-frontend:latest  # <- imagen de Docker Hub
+          imagePullPolicy: Always 
           ports: [{ containerPort: 8632 }]
           env:
             - name: REACT_APP_API_URL
