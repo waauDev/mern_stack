@@ -158,6 +158,26 @@ pipeline {
 				}
 			}
 		}
+
+        stage('Exponer backend'){
+			steps {
+				script {
+					withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG')]) {
+                         						 bat 'kubectl port-forward service/backend 5000:5000'
+					}
+				}
+			}
+		}
+
+         stage('Exponer frontend'){
+			steps {
+				script {
+					withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG')]) {
+                         						 bat 'kubectl port-forward service/frontend 30080:80'
+					}
+				}
+			}
+		}
        
     }
     post {
