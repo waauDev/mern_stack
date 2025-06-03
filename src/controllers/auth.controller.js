@@ -33,7 +33,6 @@ export const register= async (req, res) => {
     sameSite: 'lax', // o 'none' si usas cookies entre dominios con HTTPS
     });
 
-    
     //res.json(userSaved);
 
     res.json({
