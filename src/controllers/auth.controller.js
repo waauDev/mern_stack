@@ -30,7 +30,7 @@ export const register= async (req, res) => {
     res.cookie('token', token, {
     httpOnly: true,
     secure: false, // true en producción
-    sameSite: 'lax', // o 'none' si usas cookies entre dominios con HTTPS
+    sameSite: 'none', // o 'none' si usas cookies entre dominios con HTTPS
     });
 
     //res.json(userSaved);
